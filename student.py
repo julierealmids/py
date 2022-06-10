@@ -1,8 +1,5 @@
 from curses import ALL_MOUSE_EVENTS
-
-
 class Account:
-    
     def __init__(self,acc_number,acc_name):
         self.acc_name=acc_name
         self.acc_number=acc_number
@@ -20,18 +17,29 @@ class Account:
             return f"Hello,you have deposited {amount} and your new balance is {self.balance}"
                
     def withdraw(self,amount):
+        transaction_fee=100
         if amount > self.balance:
             return f"Your balance is {amount}, you cannot withdraw the {self.balance}"
         elif amount <0:
             return f"You cannot withdraw a negative amount"
         else:
             self.balance-=amount
+            self.transaction-=amount
             self.withdrawals.append(self.balance)
             print(self.withdrawals)
             return f"You have withdrawn {amount},your balance is {self.balance}"
         
     def deposits_statement(self):
-        print(self.deposits,sep="/n")
+        for r in self.deposits:
+            print("You have deposited {r}")
+# print(self.deposits,sep="/n")
         
     def withdrawals_statement(self):
-        print(*self.withdrawals,sep="/n")
+        for x in self.withdrawals:
+            print(f"you have withdrawn {x}")
+            
+    def current_balance(self):
+        current_balance=self.balance
+        print(current_balance)
+            
+# print(*self.withdrawals,sep="/n")
